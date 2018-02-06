@@ -1,12 +1,13 @@
 <?php
 
 // definir rutas relativas a la raiz
-chdir( dirname(__DIR__));
+chdir(dirname(__DIR__));
 
 define("SYS_PATH","lib/");
-define("app_PATH","app/");
+define("APP_PATH","app/");
 
 require SYS_PATH."Router.php";
+require SYS_PATH."Response.php";
 require APP_PATH."http/routes.php";
 
 
@@ -17,14 +18,18 @@ $url = $_GET["url"];
 		$action = Router::getAction($url);
 
 		$controllerName = $action["controller"];
-		$methos = $action["method"];
+		$method = $action["method"];
 
 		require APP_PATH."controllers/".$controllerName.".php";
 
 		$controller = new $controllerName();
-		$controller->method();
+		$controller->$method();
 
 	}
 	catch(Exception $e){
 		echo $e->getMessage();
 	}
+
+
+
+?>
