@@ -40,6 +40,7 @@ class HomeController extends Controller
 		$depto = Departamento::findDepto();
 		$data = get_object_vars($depto);
 		Response::render("registrar", ["resgitroSuccess" => "registro ingreso correctamente","nombre_depto" => $data[0]['nom_dep'],"nombre_depto_1" => $data[1]['nom_dep'],"nombre_depto_2" => $data[2]['nom_dep']]);
+		unset($data);
 
 	}
 	public function actionConcurso()

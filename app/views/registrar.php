@@ -6,10 +6,9 @@
 	<?php include SRC_PATH."header.php";
 
 	if(isset($resgitroSuccess)){
-		echo '<div class="col-xs-12 alert alert-success" >'.$resgitroSuccess.'</div>';
+		echo '<div class="col-xs-12 alert alert-success text-center" id="registroCreado" >'.$resgitroSuccess.'</div>';
 	}
 	 ?> 
-	
 	<div class="col-xs-6" >
 		<div class="panel-body">
 			    		<form role="form" method="POST" action="registro" id="register">

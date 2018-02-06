@@ -60,16 +60,38 @@ class Model
 
 		public static function insertar($data)
 	{
-
-		
 			$array = explode("string:", $data['departamento']);
 			$departamento = $array[1];
 
 			 $model = new static();
-			 $sql = "INSERT INTO ".$model->table."(cedula,nombre,apellido,departamento,ciudad,celular,correo)  VALUES (".$data['cedula'].",'".$data['nombre']."','".$data['apellido']."','".$data['departamento']."','".$data['ciudad']."',".$data['celular'].",'".$data['email']."')";
+			 $sql = "INSERT INTO ".$model->table."(cedula,fecha,nombre,apellido,departamento,ciudad,celular,correo)  VALUES (".$data['cedula'].",NOW(),'".$data['nombre']."','".$data['apellido']."','".$departamento."','".$data['ciudad']."',".$data['celular'].",'".$data['email']."')";
 
-		
 		 $result = DB::queryInsertar($sql);
+		 	
+			// seleccionando ganador aleatorio por concurso
+		 	$cantidad = $model->Concurso()[0]['cantidad'];
+					if($cantidad == 5){	
+						$count = count($model->concursoIniciar());
+					  for ($i=0; $i <= $count ; $i++) { 
+						$num = rand($i, $count);
+							 $ganador = $model->concursoIniciar()[$num]['cedula'];
+								 $model->concursoInsertar($ganador);
+							 exit();
+					  }
+					}
+		 return $result;
+	}
+	
+
+			public static function Concurso()
+	{
+
+			  $model = new static();
+		  		$sql = "SELECT count(*) as cantidad FROM  cliente where id_concurso is NULL ";
+
+
+		 $result = DB::queryCliente($sql);
+
 
 		 return $result;
 		// exit();
@@ -77,5 +99,47 @@ class Model
 
 	
 	}
+
+			public static function concursoIniciar()
+	{
+
+	  $model = new static();
+		 $sql = "SELECT *  FROM  cliente where id_concurso is NULL ";
+		 $result = DB::queryCliente($sql);
+		 return $result;
+	
+	}
+
+
+			public static function concursoInsertar($params)
+	{
+
+			 $model = new static();
+			 $sql = "INSERT INTO concurso(fecha_con,cedula)  VALUES (NOW(),".$params.")";
+			 $result = DB::queryInsertar($sql);
+			 $id_con = $model->concursoSeleccionar()[0]['id_con'];
+			 $model->updateCliente($id_con);
+			 return $result;
+	
+	}
+			public static function concursoSeleccionar()
+	{
+
+	  $model = new static();
+		 $sql = "SELECT *  FROM  concurso  order by id_con DESC LIMIT 1";
+		 $result = DB::queryCliente($sql);
+		 return $result;
+	
+	}
+			public static function updateCliente($id)
+	{
+		
+	  $model = new static();
+		 $sql = "UPDATE cliente set id_concurso = ".$id." where id_concurso is NULL";
+		 $result = DB::queryCliente($sql);
+		 return $result;
+	
+	}
+
 
 }

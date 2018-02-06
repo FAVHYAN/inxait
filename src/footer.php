@@ -39,6 +39,8 @@
 											return true;
 										}
 									});
+
+									// llamado del dropdown ciudad por medio del departamento
 										$( "#departamento" ).change(function() {
 										        var parametro = $( "#departamento" ).val();
 										        $.ajax({
@@ -54,11 +56,17 @@
 										        });
 										});
 								});
+								// llamado del dropdown departamento
 								var app = angular.module('departamentoApp', []);
 								app.controller('deptoController', function($scope) {
 								    $scope.names = ["<?= $nombre_depto ?>","<?= $nombre_depto_1 ?>","<?= $nombre_depto_2 ?>"];
 								});
-								</script> 
+								
+								// eliminar combo de alerta
+								 	setTimeout(function(){
+								 		$("#registroCreado").fadeOut(500, function(){ $(this).remove();});;
+									}, 3000);
+							</script> 
 </footer>			
 </body>
 </html>

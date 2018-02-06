@@ -14,6 +14,13 @@ class DB
 		$result = $statement->fetch();
 		return $result;
 	}
+	public static function queryCliente($sql)
+	{
+		$statement = static::connection()->prepare($sql);
+		$statement->execute();
+		$result = $statement->fetchAll();
+		return $result;
+	}
 	public static function queryInsertar($sql)
 	{
 
