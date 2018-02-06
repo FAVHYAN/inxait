@@ -3,8 +3,6 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Inxait - Ganador</title>
-</head>
-<body>
+<?php include SRC_PATH."header.php"; ?>
 		<?= $nombre ?>
-</body>
-</html>
+<?php include SRC_PATH."footer.php"; ?>

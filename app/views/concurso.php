@@ -3,8 +3,6 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Inxait - Concurso</title>
-</head>
-<body>
-holaaaa
-</body>
-</html>
+<?php include SRC_PATH."header.php"; ?>
+	holaaaa
+<?php include SRC_PATH."footer.php"; ?>

@@ -16,5 +16,7 @@ class Cliente extends Model
 	public $correo;
 	public $idConcurso;
 
+	
+
 
 }

@@ -2,9 +2,6 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>Inxait</title>
-<?php include SRC_PATH."header.php"; ?> 
-
-
-
+	<title>Inxait - Ganadores</title>
+<?php include SRC_PATH."header.php"; ?>
 <?php include SRC_PATH."footer.php"; ?>
