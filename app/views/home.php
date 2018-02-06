@@ -5,6 +5,6 @@
 	<title>Inxait</title>
 </head>
 <body>
-holaaaa
+		<?= $nombre ?>
 </body>
 </html>

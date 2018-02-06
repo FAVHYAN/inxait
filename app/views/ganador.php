@@ -5,6 +5,6 @@
 	<title>Inxait - Ganador</title>
 </head>
 <body>
-	<?= $greeting ?>
+		<?= $nombre ?>
 </body>
 </html>

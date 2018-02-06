@@ -4,7 +4,8 @@ class MainController
 {
 	public function index()
 	{
-		Response::render("home");
+		$cliente = Cliente::find(1110465049);
+		Response::render("home", ["nombre" => $cliente->nombre]);
 	}
 	public function registrar()
 	{
@@ -16,6 +17,7 @@ class MainController
 	}
 	public function ganador()
 	{
-		Response::render("ganador",["greeting" => "modelado de vistas"]);		
+		$cliente = Cliente::find(1110465049);
+		Response::render("ganador", ["nombre" => $cliente->nombre]);
 	}
 }
