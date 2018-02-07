@@ -8,13 +8,26 @@ class Model
 
 	public static function find($cedula)
 	{
+
+		$model = new static();
+		$sql = "SELECT * FROM ".$model->table." where ".$model->primaryKey."=".$cedula;
+
+		$result = DB::querySinParametros($sql);
+
+		foreach ($result as $key => $value) 
+		{
+			$model->$key = $value;
+		}
+		return $model;
+	}
+ 	
+	public static function findConcurso($id)
+	{
 		$model = new static();
 
-		$sql = "SELECT * FROM ".$model->table." where ".$model->primaryKey."= :cedula";
-
-		
-		$params =["cedula" => $cedula];
-		$result = DB::query($sql,$params);
+		$sql = "SELECT * FROM ".$model->table." a  INNER JOIN concurso b ON a.id_concurso = id_con  where id_con=".$id;
+	
+			$result = DB::querySinParametros($sql);
 
 
 		foreach ($result as $key => $value) 
@@ -22,7 +35,6 @@ class Model
 			$model->$key = $value;
 
 		}
-
 		return $model;
 	}
  	
@@ -72,11 +84,10 @@ class Model
 		 	$cantidad = $model->Concurso()[0]['cantidad'];
 					if($cantidad == 5){	
 						$count = count($model->concursoIniciar());
-					  for ($i=0; $i <= $count ; $i++) { 
-						$num = rand($i, $count);
+					  for ($i=0; $i < $count ; $i++) { 
+						$num = rand($i, $count-1);
 							 $ganador = $model->concursoIniciar()[$num]['cedula'];
 								 $model->concursoInsertar($ganador);
-							 exit();
 					  }
 					}
 		 return $result;
@@ -85,59 +96,55 @@ class Model
 
 			public static function Concurso()
 	{
-
 			  $model = new static();
 		  		$sql = "SELECT count(*) as cantidad FROM  cliente where id_concurso is NULL ";
-
-
-		 $result = DB::queryCliente($sql);
-
-
-		 return $result;
-		// exit();
-
-
-	
+		 		$result = DB::querySinParametros($sql);
+		 		return $result;	
 	}
 
 			public static function concursoIniciar()
 	{
-
-	  $model = new static();
-		 $sql = "SELECT *  FROM  cliente where id_concurso is NULL ";
-		 $result = DB::queryCliente($sql);
-		 return $result;
-	
+			  $model = new static();
+		 		$sql = "SELECT *  FROM  cliente where id_concurso is NULL ";
+		 		$result = DB::querySinParametros($sql);
+		 		return $result;	
 	}
 
 
 			public static function concursoInsertar($params)
 	{
-
 			 $model = new static();
 			 $sql = "INSERT INTO concurso(fecha_con,cedula)  VALUES (NOW(),".$params.")";
 			 $result = DB::queryInsertar($sql);
 			 $id_con = $model->concursoSeleccionar()[0]['id_con'];
 			 $model->updateCliente($id_con);
-			 return $result;
-	
+			 return $result;	
 	}
 			public static function concursoSeleccionar()
 	{
 
-	  $model = new static();
-		 $sql = "SELECT *  FROM  concurso  order by id_con DESC LIMIT 1";
-		 $result = DB::queryCliente($sql);
-		 return $result;
+	 		 $model = new static();
+			 $sql = "SELECT *  FROM  concurso  order by id_con DESC LIMIT 1";
+		 	 $result = DB::querySinParametros($sql);
+			 return $result;
+	
+	}
+			public static function concursoSeleccionarAll()
+	{
+
+	 		 $model = new static();
+			 $sql = "SELECT *  FROM  concurso a INNER JOIN cliente b ON a.cedula = b.cedula order by fecha_con DESC";
+			 $result = DB::querySinParametros($sql);
+			 return $result;
 	
 	}
 			public static function updateCliente($id)
 	{
 		
-	  $model = new static();
-		 $sql = "UPDATE cliente set id_concurso = ".$id." where id_concurso is NULL";
-		 $result = DB::queryCliente($sql);
-		 return $result;
+	 		 $model = new static();
+		 	 $sql = "UPDATE cliente set id_concurso = ".$id." where id_concurso is NULL";
+			 $result = DB::querySinParametros($sql);
+			 return $result;
 	
 	}
 

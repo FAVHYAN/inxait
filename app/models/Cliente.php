@@ -8,13 +8,13 @@ class Cliente extends Model
 {
 	protected $table = "cliente";
 
-	public $nombre;
-	public $apellido;
-	public $departamento;
-	public $ciudad;
-	public $celular;
-	public $correo;
-	public $idConcurso;
+	protected $nombre;
+	protected $apellido;
+	protected $departamento;
+	protected $ciudad;
+	protected $celular;
+	protected $correo;
+	protected $idConcurso;
 
 	
 

@@ -8,7 +8,7 @@
   <script src="https://code.jquery.com/jquery-3.3.1.min.js" ></script>
   <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
   <script src="js/bootstrap.min.js" ></script>
-  
+
 </head>
   		<div class="container">
 			<div class="row">
@@ -18,11 +18,10 @@
 					    <div class="navbar-header">
 					      <a class="navbar-brand" href="#">AUTOMoviles</a>
 					    </div>
-					    <ul class="nav navbar-nav">
-					      <li><a href="index">Home</a></li>
-						  <li><a href="concurso">Concursos</a></li> 
-						  <li><a href="ganadores">Ganadores</a></li> 
-						  <li><a href="registrar">Registrar</a></li>
+					    <ul class="nav navbar-nav" style="float:right">
+					      <li><a href="<?php URL_PATH ?>/inxait/public/home/index">Home</a></li>
+						  <li><a href="<?php URL_PATH ?>/inxait/public/home/concurso">Concurso</a></li>  
+						  <li><a href="<?php URL_PATH ?>/inxait/public/home/registrar">Registrar</a></li>
 					    </ul>
 					  </div>
 					</nav>

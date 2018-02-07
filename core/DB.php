@@ -14,7 +14,7 @@ class DB
 		$result = $statement->fetch();
 		return $result;
 	}
-	public static function queryCliente($sql)
+	public static function querySinParametros($sql)
 	{
 		$statement = static::connection()->prepare($sql);
 		$statement->execute();
