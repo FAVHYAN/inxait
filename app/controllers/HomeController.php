@@ -40,8 +40,9 @@ class HomeController extends Controller
 			
 			$array = explode("string:", $_POST['parametro']);
 			$ciudad = Ciudad::findCiudad($array[1]);
+			
 			$data = get_object_vars($ciudad);
-			echo "<label>Ciudad</label><span style='color:red;float: right;'>*</span><select id='ciudad' name='ciudad' class='form-control input-sm' style='color:#949494!important'><option value='' >Seleccione una Ciudad</option> <option>".$data[0]['nom_ciu']."</option> <option>".$data[1]['nom_ciu']."</option> <option>".$data[2]['nom_ciu']."</option> </select>";
+			echo "<label>Ciudad</label><span style='color:red;float: right;'>*</span><select id='ciudad' name='ciudad' class='form-control input-sm' style='color:#949494!important'><option value='' >Seleccione una Ciudad</option> <option value=".$data[0]['id_ciu'].">".$data[0]['nom_ciu']."</option> <option  value=".$data[0]['id_ciu'].">".$data[1]['nom_ciu']."</option> <option  value=".$data[0]['id_ciu'].">".$data[2]['nom_ciu']."</option> </select>";
 
 	}
 	public function actionRegistro()

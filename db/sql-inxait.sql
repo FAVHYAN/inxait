@@ -26,7 +26,7 @@ CREATE TABLE IF NOT EXISTS `ciudad` (
   CONSTRAINT `FK_ciudad_departamento` FOREIGN KEY (`id_dep`) REFERENCES `departamento` (`id_dep`)
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 
--- Volcando datos para la tabla inxait.ciudad: ~9 rows (aproximadamente)
+-- Volcando datos para la tabla inxait.ciudad: ~8 rows (aproximadamente)
 /*!40000 ALTER TABLE `ciudad` DISABLE KEYS */;
 INSERT INTO `ciudad` (`id_ciu`, `nom_ciu`, `id_dep`) VALUES
 	(1, 'bogota', 1),
@@ -47,28 +47,26 @@ CREATE TABLE IF NOT EXISTS `cliente` (
   `nombre` varchar(50) DEFAULT NULL,
   `apellido` varchar(50) DEFAULT NULL,
   `departamento` varchar(50) DEFAULT NULL,
+  `id_ciu` int(11) DEFAULT NULL,
   `ciudad` varchar(50) DEFAULT NULL,
   `celular` int(10) DEFAULT NULL,
   `correo` varchar(150) DEFAULT NULL,
   `id_concurso` int(11) DEFAULT NULL,
-  PRIMARY KEY (`cedula`)
+  PRIMARY KEY (`cedula`),
+  KEY `FK_cliente_concurso` (`id_concurso`),
+  KEY `FK_cliente_ciudad` (`id_ciu`),
+  CONSTRAINT `FK_cliente_ciudad` FOREIGN KEY (`id_ciu`) REFERENCES `ciudad` (`id_ciu`),
+  CONSTRAINT `FK_cliente_concurso` FOREIGN KEY (`id_concurso`) REFERENCES `concurso` (`id_con`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- Volcando datos para la tabla inxait.cliente: ~12 rows (aproximadamente)
 /*!40000 ALTER TABLE `cliente` DISABLE KEYS */;
-INSERT INTO `cliente` (`cedula`, `fecha`, `nombre`, `apellido`, `departamento`, `ciudad`, `celular`, `correo`, `id_concurso`) VALUES
-	(0, '2018-02-06 14:17:39', 'Hugo Fabian', 'asd', 'Tolima', 'ibague', 34234, 'favhyan@gmail.com', 16),
-	(1, '2018-02-06 14:17:39', 'Hugo Fabian', 'asd', 'cundinamarca', 'girardot', 34234, 'favhyan@gmail.com', 16),
-	(2, '2018-02-06 14:17:39', 'Webpaje internet Marketing ', 'asd', 'Tolima', 'armero', 34234, 'favhyan@gmail.com', 16),
-	(3, '2018-02-06 14:17:39', 'Hugo Fabian', 'asd', 'cundinamarca', 'girardot', 34234, 'favhyan@gmail.com', 16),
-	(4, '2018-02-06 14:17:39', 'Hugo Fabian', 'asd', 'Tolima', 'ibague', 9, 'favhyan@gmail.com', 16),
-	(6, '2018-02-06 14:39:11', 'Hugo Fabian', 'asd', 'Tolima', 'ibague', 34234, 'favhyan@gmail.com', 17),
-	(7, '2018-02-06 14:39:11', 'Hugo Fabian', 'asd', 'cundinamarca', 'girardot', 34234, 'favhyan@gmail.com', 17),
-	(8, '2018-02-06 14:39:11', 'Webpaje internet Marketing ', 'asd', 'Tolima', 'armero', 34234, 'favhyan@gmail.com', 17),
-	(9, '2018-02-06 14:39:11', 'Hugo Fabian', 'asd', 'cundinamarca', 'girardot', 34234, 'favhyan@gmail.com', 17),
-	(10, '2018-02-06 14:39:11', 'Hugo Fabian', 'asd', 'cauca', 'cali', 34234, 'favhyan@gmail.com', 17),
-	(23123, '2018-02-06 18:14:23', 'ADASDA', 'asdaSD', 'Tolima', 'ibague', 34234, 'sFSDFSDF', NULL),
-	(1110465049, '2018-02-06 18:46:20', 'Hugo Fabian', 'asd', 'Tolima', 'armero', 34234, 'favhyan@gmail.com', NULL);
+INSERT INTO `cliente` (`cedula`, `fecha`, `nombre`, `apellido`, `departamento`, `id_ciu`, `ciudad`, `celular`, `correo`, `id_concurso`) VALUES
+	(677, '2018-02-07 05:49:04', 'Hugo Fabian', 'asd', 'Tolima', 4, 'ibague', 34234, 'favhyan@gmail.com', 19),
+	(34234, '2018-02-07 05:49:04', 'Hugo Fabian', 'asd', 'cauca', 7, 'cali', 34234, 'favhyan@gmail.com', 19),
+	(454545, '2018-02-07 05:49:04', 'Hugo Fabian', 'asd', 'cundinamarca', 1, 'bogota', 34234, 'favhyan@gmail.com', 19),
+	(75676756, '2018-02-07 05:49:04', 'Hugo Fabian', 'asd', 'Tolima', 4, 'ibague', 34234, 'favhyan@gmail.com', 19),
+	(1110465049, '2018-02-07 05:49:04', 'Hugo Fabian', 'asd', 'Tolima', 4, 'ibague', 34234, 'favhyan@gmail.com', 19);
 /*!40000 ALTER TABLE `cliente` ENABLE KEYS */;
 
 -- Volcando estructura para tabla inxait.concurso
@@ -78,23 +76,25 @@ CREATE TABLE IF NOT EXISTS `concurso` (
   `cedula` int(11) DEFAULT NULL,
   `competencia` char(1) DEFAULT '1',
   PRIMARY KEY (`id_con`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=latin1;
 
 -- Volcando datos para la tabla inxait.concurso: ~2 rows (aproximadamente)
 /*!40000 ALTER TABLE `concurso` DISABLE KEYS */;
 INSERT INTO `concurso` (`id_con`, `fecha_con`, `cedula`, `competencia`) VALUES
 	(16, '2018-02-06 14:17:39', 1, '1'),
-	(17, '2018-02-06 14:39:11', 8, '1');
+	(17, '2018-02-06 14:39:11', 8, '1'),
+	(18, '2018-02-06 20:58:41', 789, '1'),
+	(19, '2018-02-07 05:49:04', 454545, '1');
 /*!40000 ALTER TABLE `concurso` ENABLE KEYS */;
 
 -- Volcando estructura para tabla inxait.departamento
 CREATE TABLE IF NOT EXISTS `departamento` (
   `id_dep` int(11) NOT NULL AUTO_INCREMENT,
-  `nom_dep` varchar(50) DEFAULT NULL,
+  `nom_dep` varchar(50),
   PRIMARY KEY (`id_dep`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
--- Volcando datos para la tabla inxait.departamento: ~3 rows (aproximadamente)
+-- Volcando datos para la tabla inxait.departamento: ~2 rows (aproximadamente)
 /*!40000 ALTER TABLE `departamento` DISABLE KEYS */;
 INSERT INTO `departamento` (`id_dep`, `nom_dep`) VALUES
 	(1, 'cundinamarca'),

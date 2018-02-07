@@ -75,9 +75,19 @@ class Model
 			$array = explode("string:", $data['departamento']);
 			$departamento = $array[1];
 
-			 $model = new static();
-			 $sql = "INSERT INTO ".$model->table."(cedula,fecha,nombre,apellido,departamento,ciudad,celular,correo)  VALUES (".$data['cedula'].",NOW(),'".$data['nombre']."','".$data['apellido']."','".$departamento."','".$data['ciudad']."',".$data['celular'].",'".$data['email']."')";
 
+
+			 $model = new static();
+
+			 $sql = "SELECT nom_ciu FROM ciudad where id_ciu =".$data['ciudad'];
+				$result = DB::querySinParametros($sql);
+
+			 $sql = "INSERT INTO ".$model->table."(cedula,fecha,nombre,apellido,departamento,id_ciu,ciudad,celular,correo)  VALUES (".$data['cedula'].",NOW(),'".$data['nombre']."','".$data['apellido']."','".$departamento."',".$data['ciudad'].",'".$result[0]['nom_ciu']."',".$data['celular'].",'".$data['email']."')";
+
+
+			//  echo '<pre>';
+			// print_r($sql);
+			// exit();
 		 $result = DB::queryInsertar($sql);
 		 	
 			// seleccionando ganador aleatorio por concurso
